@@ -29,6 +29,8 @@ module Api
 
       def ship
         @order = Order.find(params[:id])
+        processor = OrderProcessor.new(@order)
+
         print "3333333333333>>>>>>>  ", @order
 
         # product_ids = OrderProduct.where(order_id: params[:id]).pluck(:product_id)
@@ -38,7 +40,7 @@ module Api
         # shippable = @order.status != "shipped" && @products.count > 0
         
 
-        if @order.ship
+        if processor.ship
           render json: @order, status: :ok, location: api_v1_order_url(@order)
         else
           render json: {message: "There was a problem shipping your order."}
