@@ -19,6 +19,9 @@ module Api
       end
 
       def create
+
+        10.times do { print "@##@"}
+
         @order = Order.find(params[:order_id])
         @order_product = OrderProduct.new(order_id: @order.id, product_id: order_product_params[:product_id])
 
